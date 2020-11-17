@@ -1,8 +1,9 @@
 FROM golang:1.13 AS builder
 WORKDIR /go/src/github.com/wusphinx/multistage/
-COPY main.go .
 ENV GO111MODULE=on
+COPY go.mod go.sum ./ 
 RUN go mod tidy 
+COPY main.go .
 RUN GOOS=linux GOARCH=amd64 go build -o app .
 
 FROM alpine:latest  
