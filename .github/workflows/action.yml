@@ -32,4 +32,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: wusphinx/multistage:latest
+          tags: ghcr.io/wusphinx/multistage:latest
