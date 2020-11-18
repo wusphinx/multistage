@@ -2,7 +2,7 @@ FROM golang:1.13 as builder
 WORKDIR /go/src/github.com/wusphinx/multistage/
 COPY go.mod go.sum ./ 
 # cache 
-RUN go mod download 
+RUN GO111MODULE=on GOPROXY=https://goproxy.cn,direct go mod download 
 COPY main.go .
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -o app .
 
