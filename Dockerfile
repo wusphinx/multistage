@@ -1,10 +1,11 @@
-FROM golang:1.13 AS builder
+FROM golang:1.13 as builder
 WORKDIR /go/src/github.com/wusphinx/multistage/
 ENV GO111MODULE=on
 COPY go.mod go.sum ./ 
-RUN go mod tidy 
+# cache 
+RUN go mod download 
 COPY main.go .
-RUN GOOS=linux GOARCH=amd64 go build -o app .
+RUN RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -o app .
 
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
