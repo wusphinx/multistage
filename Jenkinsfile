@@ -21,12 +21,30 @@ pipeline {
           }
         }
 
+        stage('a4 ') {
+          steps {
+            echo 'a41'
+            echo 'a42'
+          }
+        }
+
       }
     }
 
     stage('b1') {
-      steps {
-        echo 'b1'
+      parallel {
+        stage('b1') {
+          steps {
+            echo 'b1'
+          }
+        }
+
+        stage('b2') {
+          steps {
+            echo 'b2'
+          }
+        }
+
       }
     }
 
